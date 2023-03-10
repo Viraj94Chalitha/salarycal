@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <script src="./scripts.js"></script> -->
+</head>
+<body>
+
+  
+<div style="padding-top: 35px" class="container">
+
+    <form>
+        <div class="row">
+          <div style="padding-top: 15px" class="col-lg-6 col-md-6">
+            <input id="basicSalary" type="text" class="form-control" placeholder="Basic Salary">
+          </div>
+          <div style="padding-top: 15px" class="col-lg-6 col-md-6">
+            <input id="fixedAllowance" type="text" class="form-control" placeholder="Fixed Allowance">
+          </div>
+        </div>
+        <div class="row">
+            <div style="padding-top: 15px" class="col-lg-6 col-md-6">
+              <input id="dollarRate" type="text" class="form-control" placeholder="Dollar rate">
+            </div>
+            <div style="padding-top: 15px" class="col-lg-6 col-md-6">
+              <input id="adjustRate" type="text" class="form-control" placeholder="Adjustment Rate">
+            </div>
+          </div>
+        <div style="padding-top: 15px">
+            <button onclick="calculate()" type="button" class="btn btn-info">Calculate</button>
+        </div>
+        <p style="padding-top: 10px;" >Net Salary <span id="netSalary"></span></p>
+      </form>
+      <table class="table table-striped">
+       
+        <tbody>
+          <tr>
+         
+            <td>Total Salary</td>
+            <td id="tableTotal"></td>
+          </tr>
+          <tr>
+           
+            <td>Peg Amount</td>
+            <td id="tablePeg"></td>
+          </tr>
+          <tr>
+           
+            <td>Net Amount</td>
+            <td id="tableNet"></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<script>
+    const calculate = () => {
+
+      const basicSalary = Number(document.getElementById('basicSalary').value)
+      const fixedAllowance = Number(document.getElementById('fixedAllowance').value)
+      const dollarRate = Number(document.getElementById('dollarRate').value)
+      const adjustRate = Number(document.getElementById('adjustRate').value)
+ 
+      let totalSalary = basicSalary + fixedAllowance
+      let netSalary = totalSalary - (basicSalary*8/100) + ((totalSalary*dollarRate/adjustRate) - totalSalary)
+      
+      // var netSalaryView = document.getElementById("netSalary");
+      var tableTotalView = document.getElementById("tableTotal");
+      var tablePegView = document.getElementById("tablePeg");
+      var tableNetView = document.getElementById("tableNet");
+      
+      // netSalaryView.innerHTML = `${netSalary}`;
+      tableTotalView.innerHTML = `${totalSalary.toFixed(2)}`;
+      tablePegView.innerHTML = `${((totalSalary*dollarRate/adjustRate) - totalSalary).toFixed(2)}`;
+      tableNetView.innerHTML = `${netSalary.toFixed(2)}`;
+} 
+</script>
+
+
+</body>
+</html>
